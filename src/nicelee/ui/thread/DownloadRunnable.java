@@ -81,6 +81,28 @@ public class DownloadRunnable implements Runnable {
 			BatchDownloadRbyRThread.taskFail(clip, "already downloaded");
 			return;
 		}
+        while (getUsableSpace() < 5) {
+            System.out.println("磁盘已满 等待");
+            try {
+                Thread.sleep(300000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        while (Global.downloadTaskList.size() > 100) {
+            for (Map.Entry<DownloadInfoPanel, IDownloader> downloadInfoPanelIDownloaderEntry : Global.downloadTaskList.entrySet()) {
+                downloadInfoPanelIDownloaderEntry.getKey().removeTask(false);
+            }
+            if (Global.downloadTaskList.size() > 100) {
+                System.out.println("下载队列超过100 等待");
+                try {
+                    Thread.sleep(60000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
 		// 新建下载部件
 		DownloadInfoPanel downPanel = new DownloadInfoPanel(clip, qn);
 		// 判断是否在下载任务中
@@ -139,4 +161,10 @@ public class DownloadRunnable implements Runnable {
 		}
 	}
 
+    private long getUsableSpace() {
+        File file = new File("e://");
+        long usableSpace = file.getUsableSpace();
+        long l = usableSpace / 1024 / 1024 / 1024;
+        return l;
+    }
 }
