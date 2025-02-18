@@ -70,13 +70,7 @@ public class BatchDownloadThread extends Thread {
 					if(!isPageable && page >= 2)
 						break;
 					String sp = validStr + " p=" + page;
-					VideoInfo avInfo = null;
-					try {
-						avInfo = ina.getVideoDetail(sp, Global.downloadFormat, false);
-					} catch (Exception e) {
-						e.printStackTrace();
-						break;
-					}
+					VideoInfo avInfo = ina.getVideoDetail(sp, Global.downloadFormat, false);
 					Collection<ClipInfo> clips = avInfo.getClips().values();
 					if (clips.size() == 0)
 						break;

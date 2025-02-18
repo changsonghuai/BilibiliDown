@@ -54,9 +54,6 @@ public class MonitoringThread extends Thread {
 							dp.getLbDownFile().setText("文件大小: "  + fileSize);
 							dp.getBtnControl().setVisible(false);
 							dp.setBackground(lightGreen);
-							if (doneTask > 50) {
-								dp.removeTask(false);
-							}
 							// TODO 将成功的任务状态记入
 							BatchDownloadRbyRThread.taskSucceed(dp.getClipInfo(), formattedTitle, fileSize, "" + dp.getRealqn());
 						}
@@ -194,11 +191,6 @@ public class MonitoringThread extends Thread {
 			if(Global.playSoundAfterMissionComplete && lastActiveTaskCount > 0 && activeTask == 0 && pauseTaskCanRetry == 0)
 				Audio.play();
 			lastActiveTaskCount = activeTask;
-            if (doneTask > 50) {
-                for (DownloadInfoPanel dp : Global.downloadTaskList.keySet()) {
-                    dp.removeTask(false);
-                }
-            }
 			try {
 				Thread.sleep(1500);
 			} catch (InterruptedException e) {

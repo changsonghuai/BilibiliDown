@@ -416,12 +416,8 @@ public class CmdUtil {
 		paramMap.put("pAv", "" + clip.getPage());
 		paramMap.put("pDisplay", "" + clip.getRemark());
 		paramMap.put("qn", "" + realQN);
-		String avTitle = clip.getAvTitle().replaceAll("[/\\\\]", "_");
-		String clipTitle = clip.getTitle().replaceAll("[/\\\\]", "_");
-		paramMap.put("avTitle", avTitle);
-		if( !(Global.ctFormatAllowNull && avTitle.equals(clipTitle)) ) {
-			paramMap.put("clipTitle", clipTitle);
-		}
+		paramMap.put("avTitle", clip.getAvTitle().replaceAll("[/\\\\]", "_"));
+		paramMap.put("clipTitle", clip.getTitle().replaceAll("[/\\\\]", "_"));
 		paramMap.put("listName", clip.getListName()); // 已确保没有路径分隔符
 		paramMap.put("listOwnerName", clip.getListOwnerName()); // 已确保没有路径分隔符
 		paramMap.put("UpName", clip.getUpName().replaceAll("[/\\\\]", "_"));
