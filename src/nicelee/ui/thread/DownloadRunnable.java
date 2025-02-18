@@ -1,10 +1,13 @@
 package nicelee.ui.thread;
 
 import java.awt.Dimension;
+import java.io.File;
+import java.util.Map;
 
 import javax.swing.JPanel;
 
 import nicelee.bilibili.INeedAV;
+import nicelee.bilibili.downloaders.IDownloader;
 import nicelee.bilibili.exceptions.BilibiliError;
 import nicelee.bilibili.model.ClipInfo;
 import nicelee.bilibili.model.VideoInfo;
