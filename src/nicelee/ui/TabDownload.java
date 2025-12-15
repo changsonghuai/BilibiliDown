@@ -36,7 +36,7 @@ public class TabDownload extends JPanel implements ActionListener {
 		initUI();
 	}
 
-	public int activeTask;
+	public static int activeTask;
 	public void refreshStatus(int totalTask,int activeTask,int pauseTask,int doneTask,int queuingTask) {
 		this.activeTask = activeTask;
 		String txt = String.format(" 总计: %d / 下载中 : %d / 暂停 : %d / 下载完 : %d / 队列中 : %d", 
