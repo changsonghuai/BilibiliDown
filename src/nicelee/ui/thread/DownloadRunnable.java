@@ -22,7 +22,7 @@ import nicelee.ui.item.DownloadInfoPanel;
 import nicelee.ui.item.JOptionPaneManager;
 
 public class DownloadRunnable implements Runnable {
-	
+
 	VideoInfo avInfo;
 	ClipInfo clip;
 	String displayName;
@@ -87,20 +87,19 @@ public class DownloadRunnable implements Runnable {
 			return;
 		}
         while (Global.downloadTaskList.size() > 100) {
-            if (TabDownload.activeTask == 0) {
+            if (TabDownload.activeTask < 2) {
                 for (DownloadInfoPanel dp : Global.downloadTaskList.keySet()) {
                     dp.removeTask(false);
                 }
             }
 
-            if (Global.downloadTaskList.size() > 100) {
                 System.out.println("下载队列超过100 等待");
                 try {
-                    Thread.sleep(180000);
+                    Thread.sleep(20000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-            }
+
         }
 		// 新建下载部件
 		DownloadInfoPanel downPanel = new DownloadInfoPanel(clip, qn);

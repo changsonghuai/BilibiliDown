@@ -96,14 +96,14 @@ public class DownloadRunnableInternal implements Runnable {
 			}
 			// 开始下载
 			if (iNeedAV.downloadClip(validUrl, avid, iNeedAV.getInputParser(avid).getVideoLinkQN(), page)) {
-				// 下载成功后保存到仓库
+                CmdUtil.convertOrAppendCmdToRenameBat(avid_qn, formattedTitle, page);
+                // 下载成功后保存到仓库
 				if (Global.saveToRepo) {
 					RepoUtil.appendAndSave(record);
 				}
 				if (Global.thumbUpAfterDownloaded && Global.isLogin && avid.startsWith("BV")) {
 					API.like(avid);
 				}
-				CmdUtil.convertOrAppendCmdToRenameBat(avid_qn, formattedTitle, page);
 			}
 		} catch (BilibiliError e) {
 			JOptionPaneManager.alertErrMsgWithNewThread("发生了预料之外的错误", ResourcesUtil.detailsOfException(e));
