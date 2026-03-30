@@ -265,20 +265,20 @@ public class DownloadInfoPanel extends JPanel implements ActionListener {
 		// 删除所有 或 删除已完成的任务
 		// 0 正在下载; 1 下载完毕; -1 出现错误; -2 人工停止;-3队列中
 		if (deleteAll || iNeedAV.getDownloader().currentStatus() == StatusEnum.SUCCESS) {
-            if(!deleteAll){
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-            }
+
 			this.stopOnQueue = true;
 			// 停止下载
 			Global.downloadTaskList.get(this).stopTask();
             // 删除未完成的下载文件
             File file = new File(lbFileName.getText() + ".part");
             if (file.exists()) {
-                file.delete();
+                while (!file.delete()){
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
             }
 			// 全局监控撤销
 			Global.downloadTaskList.remove(this);
