@@ -275,6 +275,11 @@ public class DownloadInfoPanel extends JPanel implements ActionListener {
 			this.stopOnQueue = true;
 			// 停止下载
 			Global.downloadTaskList.get(this).stopTask();
+            // 删除未完成的下载文件
+            File file = new File(lbFileName.getText() + ".part");
+            if (file.exists()) {
+                file.delete();
+            }
 			// 全局监控撤销
 			Global.downloadTaskList.remove(this);
 			// 当前页面控件删除
@@ -284,11 +289,7 @@ public class DownloadInfoPanel extends JPanel implements ActionListener {
 					.setPreferredSize(new Dimension(1100, 128 * Global.downloadTaskList.size()));
 			Global.downloadTab.getJpContent().updateUI();
 			Global.downloadTab.getJpContent().repaint();
-			// 删除未完成的下载文件
-			File file = new File(lbFileName.getText() + ".part");
-			if (file.exists()) {
-				file.delete();
-			}
+
 		}
 	}
 

@@ -220,9 +220,11 @@ public class HttpRequestUtil {
 			if (fileDownloadPart.length() < totalFileSize) {
 				download(urlNameString, fileName, headers);
 			} else {
-				fileDownloadPart.renameTo(fileDownload);
-				System.out.println("下载完毕...");
-			}
+				while(!fileDownloadPart.renameTo(fileDownload)){
+                    Thread.sleep(1000);
+                }
+                System.out.println("下载完毕...");
+            }
 		} catch (Exception e) {
 			System.out.println("发送GET请求出现异常！" + e);
 			e.printStackTrace();
