@@ -265,6 +265,13 @@ public class DownloadInfoPanel extends JPanel implements ActionListener {
 		// 删除所有 或 删除已完成的任务
 		// 0 正在下载; 1 下载完毕; -1 出现错误; -2 人工停止;-3队列中
 		if (deleteAll || iNeedAV.getDownloader().currentStatus() == StatusEnum.SUCCESS) {
+            if(!deleteAll){
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
 			this.stopOnQueue = true;
 			// 停止下载
 			Global.downloadTaskList.get(this).stopTask();
